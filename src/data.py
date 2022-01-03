@@ -30,7 +30,7 @@ def main(transDictList):
 
 
 
-# main(get.main('transData\\transactions.txt')) // Testing purposes
+# main(get.main('input\transactions.txt')) // Testing purposes
 
 
 
