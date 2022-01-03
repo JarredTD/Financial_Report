@@ -11,14 +11,19 @@ class Get():
         openedFile.close()
         return listOfLines
 
-
-    #TODO Seperate transToDict into two functions; Seperation of functionality.
-    def transToDict(self, trans):
+    def lineCleaner(self, trans):
         '''
-        Seperates transInfo by tab delimiter, cleans new line character at the end.
-        Creates dict for each trans, giving each transInfo a key to access the transInfo value.
+        Cleans newline character at end of each line, and splits per delimiter.
         '''
         indivTrans = trans.strip('\n').split('\t')
+        return indivTrans
+
+    #TODO Seperate transToDict into two functions; Seperation of functionality.
+    def transToDict(self, indivTrans):
+
+        '''
+        Creates dict for each trans, giving each transInfo a key to access the transInfo value.
+        '''
         #TODO Pull this info from a file, use boolean to determine whether to use.
         # Perhaps, create a list from the file, drop false values, iterate through list setting each value from list as a key.
 
@@ -41,8 +46,9 @@ def main(file):
     transDictList = []
 
     for trans in transList:
-        transDictList.append(get.transToDict(trans))
+        indivTrans=get.lineCleaner(trans)
+        transDictList.append(get.transToDict(indivTrans))
     
     return transDictList
 
-# main()
+# main('input\\transactions.txt')
