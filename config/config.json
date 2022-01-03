@@ -1,0 +1,19 @@
+{
+    "Categories":[
+        {"Category_1":"Restaurants"},
+        {"Category_2":"Gas & Fuel"}
+    ],
+
+    "Data_Types":[
+        {"Data_Type_1":"Date"},
+        {"Data_Type_2":"Description"},
+        {"Data_Type_3":"Amount"},
+        {"Data_Type_4":"Transaction Type"},
+        {"Data_Type_5":"Category"},
+        {"Data_Type_6":"Account Name"}
+    ],
+
+    "Delimiter":[
+        {"Delimiter":"\t"}
+    ]
+}
