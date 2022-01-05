@@ -1,3 +1,5 @@
+import json
+
 class Get():
     def __init__(self, file) -> None:
         self.file = file
@@ -6,7 +8,7 @@ class Get():
         '''
         Opens file and retrieves a list of all the lines (trans).
         '''
-        openedFile = open(self.file, 'r')
+        openedFile = open(self.file, 'r') 
         listOfLines = openedFile.readlines()
         openedFile.close()
         return listOfLines
@@ -18,28 +20,23 @@ class Get():
         indivTrans = trans.strip('\n').split('\t')
         return indivTrans
 
-    #TODO Seperate transToDict into two functions; Seperation of functionality.
     def transToDict(self, indivTrans):
-
         '''
         Creates dict for each trans, giving each transInfo a key to access the transInfo value.
         '''
-        #TODO Pull this info from a file, use boolean to determine whether to use.
-        # Perhaps, create a list from the file, drop false values, iterate through list setting each value from list as a key.
+        config = open('config\config.json')
+        configData = json.load(config)
 
-        # i.e for transDataType, index in [transDataTypeList, len(transDataTypeList):
-        #       transDict[transDataType] = indivTrans[index]
+        transDict = {}
+        #TODO Make more elegant 
+        index = 0
+        for dataType in configData['Data_Types']:
+            transDict[dataType] = indivTrans[index]
+            index += 1
 
-        # This should set each transDataType as a key in transDict, with each value in indivTrans corresponding with a key.
-        # Ideally, this is dynamic, so that changing what transDataTypes you want doesn't break the script.
-
-        transDict = {'Date':indivTrans[0], 'Description':indivTrans[1], 'Amount':indivTrans[3],
-                    'Transaction Type':indivTrans[4], 'Category':indivTrans[5], 'Account Name':indivTrans[6]}
         return transDict
         
 
-#TODO Pull transTypes from a file, so that file can be config for what types to use. Use boolean to determine what types to include, this will be exported
-# to data.py to determine what types of transactions specifically to do math on.
 def main(file):
     get = Get(file)
     transList = get.transToList()
@@ -51,4 +48,4 @@ def main(file):
     
     return transDictList
 
-# main('input\\transactions.txt')
+#main('input\\transactions.txt')
