@@ -18,7 +18,13 @@
         "Notes"
     ],
 
-    "Delimiter":[
+    "Data_Types_Remove":[
+        "Original Description",
+        "Labels",
+        "Notes"
+    ],
+
+    "Delimiter":
         "\t"
-    ]
+    
 }
