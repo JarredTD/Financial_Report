@@ -1,36 +1,39 @@
-# import get // Testing purposes
+import get
+import json
 
 class Data():
     def __init__(self, transDictList) -> None:
         self.transDictList = transDictList
 
-    def transTypeSeperator(self, transType):
+    def transTypeSeperator(self, category):
         '''
-        Appends every trans for a specific transType into transTypeDictList.
-        Returns the transTypeDictList.
+        Appends every trans for a specific Category into transCategoryDictList.
+        Returns the transCategoryDictList.
         '''
-        transTypeDictList=[]
-        #TODO Fix references to Category from transType, to Category
+        transCategoryDictList=[]
         for trans in self.transDictList:
-            if trans['Category'] == transType:
-                transTypeDictList.append(trans)
-        return transTypeDictList
+            if trans['Category'] == category:
+                transCategoryDictList.append(trans)
+        return transCategoryDictList
         
 
-#TODO Once setup, use the exported transTypeList from get.py rather than creating the list in the main function.
 def main(transDictList):
     data = Data(transDictList)
-    transTypeDict={}
-    transTypeList=['Restaurants'] # i.e, don't do this manually.
+    config = open('config\config.json')
+    configData = json.load(config)
+    transCategoryDict={}
+    
 
     #TODO Put each in its own spot as it occurs, rather than iterating through so many times? 
-    for transType in transTypeList:
-        transTypeDict[transType]=data.transTypeSeperator(transType)
-    print(transTypeDict)
+    for category in configData['Categories']:
+        transCategoryDict[category]=data.transTypeSeperator(category)
+    print(transCategoryDict) # Viewing dict, for debugging.
+
+    config.close()
 
 
 
-# main(get.main('input\transactions.txt')) // Testing purposes
+main(get.main('input\\transactions.txt'))
 
 
 
