@@ -13,20 +13,18 @@ class Get():
         openedFile.close()
         return listOfLines
 
-    def lineCleaner(self, trans):
+    def lineCleaner(self, trans, configData):
         '''
         Cleans newline character at end of each line, and splits per delimiter.
         '''
-        indivTrans = trans.strip('\n').split('\t')
+        
+        indivTrans = trans.strip('\n').split(configData['Delimiter'])
         return indivTrans
 
-    def transToDict(self, indivTrans):
+    def transToDict(self, indivTrans, configData):
         '''
         Creates dict for each trans, giving each transInfo a key to access the transInfo value.
         '''
-        config = open('config\config.json')
-        configData = json.load(config)
-
         transDict = {}
         #TODO Make more elegant 
         index = 0
@@ -38,14 +36,18 @@ class Get():
         
 
 def main(file):
+    
     get = Get(file)
     transList = get.transToList()
     transDictList = []
+    config = open('config\config.json')
+    configData = json.load(config)
 
     for trans in transList:
-        indivTrans=get.lineCleaner(trans)
-        transDictList.append(get.transToDict(indivTrans))
+        indivTrans=get.lineCleaner(trans, configData)
+        transDictList.append(get.transToDict(indivTrans, configData))
     
+    config.close()
     return transDictList
 
 #main('input\\transactions.txt')
