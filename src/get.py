@@ -50,4 +50,3 @@ def main(file):
     config.close()
     return transDictList
 
-#main('input\\transactions.txt')

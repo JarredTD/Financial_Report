@@ -1,5 +1,6 @@
-import get
 import json
+import clean
+import get
 
 class Data():
     def __init__(self, transDictList) -> None:
@@ -27,10 +28,9 @@ def main(transDictList):
     #TODO Put each in its own spot as it occurs, rather than iterating through so many times? 
     for category in configData['Categories']:
         transCategoryDict[category]=data.transTypeSeperator(category)
-    print(transCategoryDict) # Viewing dict, for debugging.
 
     config.close()
-
+    return transCategoryDict
 
 
 main(get.main('input\\transactions.txt'))
