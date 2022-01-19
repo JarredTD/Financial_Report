@@ -3,11 +3,10 @@ import json
 
 class Clean():
     def __init__(self, transDictList) -> None:
-        self.transDictList = transDictList
+        pass
 
-    def removeDataType(self, dataType):
-        # Issue is here
-        del self.transDictList[dataType]
+    def removeDataType(self, trans, dataType):
+        del trans[dataType]
 
 
 
@@ -25,7 +24,7 @@ def main(transDictList):
 
     for dataType in configData['Data_Types_Remove']:
         for trans in transDictList:
-            clean.removeDataType(dataType)
+            clean.removeDataType(trans, dataType)
 
     return transDictList
 

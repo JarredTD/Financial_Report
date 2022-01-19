@@ -16,7 +16,11 @@ class Data():
             if trans['Category'] == category:
                 transCategoryDictList.append(trans)
         return transCategoryDictList
-        
+
+    def miscTrans(self, trans):
+        transCategoryDictList=[]
+        transCategoryDictList.append(trans)
+        return transCategoryDictList
 
 def main(transDictList):
     data = Data(transDictList)
@@ -26,15 +30,30 @@ def main(transDictList):
     
 
     #TODO Put each in its own spot as it occurs, rather than iterating through so many times? 
+    #This categorizes each transaction based on categories in config
     for category in configData['Categories']:
         transCategoryDict[category]=data.transTypeSeperator(category)
+
+
+#This logic makes no sense, push non-main logic into the function miscTrans.
+    for trans in transDictList:
+        try:
+            if trans[category] not in configData['Categories']:
+                transCategoryDict["Misc"] = data.transTotal(trans)
+        except KeyError:
+            continue
+
+
 
     config.close()
     return transCategoryDict
 
 
-main(get.main('input\\transactions.txt'))
-
+#Run this file to test output.
+transDictList=get.main('input\\transactions.txt')
+cleanedTransDictList=clean.main(transDictList)
+transCategoryDict=main(cleanedTransDictList)
+print(transCategoryDict)
 
 
 
